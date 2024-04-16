@@ -104,9 +104,9 @@ public class ItemPriceInformation {
 		}
 		JsonObject auctionInfo = NotEnoughUpdates.INSTANCE.manager.auctionManager.getItemAuctionInfo(internalname);
 		JsonObject bazaarInfo = NotEnoughUpdates.INSTANCE.manager.auctionManager.getBazaarInfo(internalname);
-		double lowestBinAvg = NotEnoughUpdates.INSTANCE.manager.auctionManager.getItemAvgBin(internalname);
+		long lowestBinAvg = NotEnoughUpdates.INSTANCE.manager.auctionManager.getItemAvgBin(internalname);
 
-		double lowestBin = NotEnoughUpdates.INSTANCE.manager.auctionManager.getLowestBin(internalname);
+		long lowestBin = NotEnoughUpdates.INSTANCE.manager.auctionManager.getLowestBin(internalname);
 		APIManager.CraftInfo craftCost = NotEnoughUpdates.INSTANCE.manager.auctionManager.getCraftCost(internalname);
 		boolean bazaarItem = bazaarInfo != null;
 
@@ -146,7 +146,7 @@ public class ItemPriceInformation {
 									tooltip.add(EnumChatFormatting.DARK_GRAY + "[SHIFT show x" + shiftStackMultiplier + "]");
 								added = true;
 							}
-							double bazaarBuyPrice = bazaarInfo.get("avg_buy").getAsFloat() * stackMultiplier;
+							float bazaarBuyPrice = bazaarInfo.get("avg_buy").getAsFloat() * stackMultiplier;
 							tooltip.add(formatPrice("Bazaar Buy: ", bazaarBuyPrice));
 						}
 						break;
@@ -158,7 +158,7 @@ public class ItemPriceInformation {
 									tooltip.add(EnumChatFormatting.DARK_GRAY + "[SHIFT show x" + shiftStackMultiplier + "]");
 								added = true;
 							}
-							double bazaarSellPrice = bazaarInfo.get("avg_sell").getAsDouble() * stackMultiplier;
+							float bazaarSellPrice = bazaarInfo.get("avg_sell").getAsFloat() * stackMultiplier;
 							tooltip.add(formatPrice("Bazaar Sell: ", bazaarSellPrice));
 						}
 						break;
@@ -170,7 +170,7 @@ public class ItemPriceInformation {
 									tooltip.add(EnumChatFormatting.DARK_GRAY + "[SHIFT show x" + shiftStackMultiplier + "]");
 								added = true;
 							}
-							double bazaarInstantBuyPrice = bazaarInfo.get("curr_buy").getAsFloat() * stackMultiplier;
+							float bazaarInstantBuyPrice = bazaarInfo.get("curr_buy").getAsFloat() * stackMultiplier;
 							tooltip.add(formatPrice("Bazaar Insta-Buy: ", bazaarInstantBuyPrice));
 						}
 						break;
@@ -182,7 +182,7 @@ public class ItemPriceInformation {
 									tooltip.add(EnumChatFormatting.DARK_GRAY + "[SHIFT show x" + shiftStackMultiplier + "]");
 								added = true;
 							}
-							double bazaarInstantSellPrice = bazaarInfo.get("curr_sell").getAsFloat() * stackMultiplier;
+							float bazaarInstantSellPrice = bazaarInfo.get("curr_sell").getAsFloat() * stackMultiplier;
 							tooltip.add(formatPrice("Bazaar Insta-Sell: ", bazaarInstantSellPrice));
 						}
 						break;
@@ -195,7 +195,7 @@ public class ItemPriceInformation {
 								tooltip.add("");
 								added = true;
 							}
-							double cost = craftCost.craftCost;
+							float cost = craftCost.craftCost;
 							if (shiftPressed) cost = cost * shiftStackMultiplier;
 							tooltip.add(formatPrice("Raw Craft Cost: ", cost));
 						}
@@ -228,10 +228,10 @@ public class ItemPriceInformation {
 							}
 
 							if (auctionInfo.has("clean_price")) {
-								double cleanPrice = auctionInfo.get("clean_price").getAsDouble();
+								long cleanPrice = auctionInfo.get("clean_price").getAsLong();
 								tooltip.add(formatPrice("AH Price (Clean): ", cleanPrice));
 							} else {
-								double auctionPrice = auctionInfo.get("price").getAsDouble() / auctionInfo.get("count").getAsFloat();
+								long auctionPrice = auctionInfo.get("price").getAsLong() / auctionInfo.get("count").getAsLong();
 								tooltip.add(formatPrice("AH Price: ", auctionPrice));
 							}
 
@@ -354,11 +354,11 @@ public class ItemPriceInformation {
 		return false;
 	}
 
-	private static String formatPrice(String label, double price) {
+	private static String formatPrice(String label, float price) {
 		boolean shortNumber = NotEnoughUpdates.INSTANCE.config.tooltipTweaks.shortNumberFormatPrices;
 		String number = (shortNumber && price > 1000
 			? Utils.shortNumberFormat(price, 0)
-			: price > 5 ? format.format((int) price) : format.format(price));
+			: price > 5 ? format.format((long) price) : format.format(price));
 		return "§e§l" + label + "§6§l" + number + " coins";
 	}
 

@@ -697,28 +697,28 @@ public class CustomAH extends Gui {
 												EnumChatFormatting.GOLD + EnumChatFormatting.BOLD + format.format(lowestBin) + " coins");
 									}
 									if (hasBazaarPrice) {
-										int bazaarBuyPrice = (int) bazaarInfo.get("avg_buy").getAsFloat();
+										long bazaarBuyPrice = (long) bazaarInfo.get("avg_buy").getAsFloat();
 										tooltipToRender.add(
 											EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "Bazaar Buy: " +
 												EnumChatFormatting.GOLD + EnumChatFormatting.BOLD + format.format(bazaarBuyPrice) + " coins");
-										int bazaarSellPrice = (int) bazaarInfo.get("avg_sell").getAsFloat();
+										long bazaarSellPrice = (long) bazaarInfo.get("avg_sell").getAsFloat();
 										tooltipToRender.add(
 											EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "Bazaar Sell: " +
 												EnumChatFormatting.GOLD + EnumChatFormatting.BOLD + format.format(bazaarSellPrice) + " coins");
-										int bazaarInstantBuyPrice = (int) bazaarInfo.get("curr_buy").getAsFloat();
+										long bazaarInstantBuyPrice = (long) bazaarInfo.get("curr_buy").getAsFloat();
 										tooltipToRender.add(
 											EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "Bazaar Insta-Buy: " +
 												EnumChatFormatting.GOLD + EnumChatFormatting.BOLD + format.format(bazaarInstantBuyPrice) +
 												" coins");
-										int bazaarInstantSellPrice = (int) bazaarInfo.get("curr_sell").getAsFloat();
+										long bazaarInstantSellPrice = (long) bazaarInfo.get("curr_sell").getAsFloat();
 										tooltipToRender.add(
 											EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "Bazaar Insta-Sell: " +
 												EnumChatFormatting.GOLD + EnumChatFormatting.BOLD + format.format(bazaarInstantSellPrice) +
 												" coins");
 									}
 									if (hasAuctionPrice) {
-										int auctionPrice =
-											(int) (auctionInfo.get("price").getAsFloat() / auctionInfo.get("count").getAsFloat());
+										long auctionPrice =
+											(long) (auctionInfo.get("price").getAsFloat() / auctionInfo.get("count").getAsFloat());
 										tooltipToRender.add(EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "AH Price: " +
 											EnumChatFormatting.GOLD + EnumChatFormatting.BOLD + format.format(auctionPrice) + " coins");
 										tooltipToRender.add(EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "AH Sales: " +
@@ -728,11 +728,11 @@ public class CustomAH extends Gui {
 											tooltipToRender.add(
 												EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "AH Price (Clean): " +
 													EnumChatFormatting.GOLD + EnumChatFormatting.BOLD +
-													format.format((int) auctionInfo.get("clean_price").getAsFloat()) + " coins");
+													format.format(auctionInfo.get("clean_price").getAsLong()) + " coins");
 											tooltipToRender.add(
 												EnumChatFormatting.YELLOW.toString() + EnumChatFormatting.BOLD + "AH Sales (Clean): " +
 													EnumChatFormatting.GOLD + EnumChatFormatting.BOLD +
-													format.format(auctionInfo.get("clean_sales").getAsFloat()) + " sales/day");
+													format.format(auctionInfo.get("clean_sales").getAsLong()) + " sales/day");
 										}
 
 									}
